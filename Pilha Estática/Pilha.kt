@@ -36,7 +36,7 @@ class Pilha : Empilhavel {
         var dadoTopo: Any? = null
         if (!estaVazia()) {
             dadoTopo = dados[ponteiroTopo]
-            dados[ponteiroTopo] = null // Limpa a posição desempilhada
+            dados[ponteiroTopo] = null
             ponteiroTopo--
         } else {
             println("Pilha está vazia!")
