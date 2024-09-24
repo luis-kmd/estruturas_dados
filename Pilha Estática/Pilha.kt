@@ -1,67 +1,74 @@
-class Pilha : Empilhavel {
-    private var ponteiroTopo: Int
-    private var dados: Array<Any?>
+class Pilha: Empilhavel{
+    var ponteiroTopo Int
+    var dados Array<Any>
 
-    constructor(tamanho: Int) {
+    constructor(tamanho: Int){
         ponteiroTopo = -1
         dados = arrayOfNulls(tamanho)
     }
 
-    override fun estaCheia(): Boolean {
-        return (ponteiroTopo == dados.size - 1)
+    override fun estaVazia(): Any?{
+        return(ponteiroTopo == -1)
     }
 
-    override fun estaVazia(): Boolean {
-        return (ponteiroTopo == -1)
+    override fun estaCheia(): Any?{
+        return(ponteiroTopo == dados.size - 1)
     }
 
-    override fun empilhar(dado: Any?) {
-        if (!estaCheia()) {
-            ponteiroTopo++
+    override fun empilhar(dados: Any?){
+        if(!estaCheia()){
+            ponteiroTopo ++
             dados[ponteiroTopo] = dado
-        } else {
-            println("Pilha está cheia!")
+        }
+
+        else {
+            println("Pilha está cheia !")
         }
     }
-
-    override fun atualizar(dado: Any?) {
-        if (!estaVazia()) {
-            dados[ponteiroTopo] = dado
-        } else {
-            println("Pilha está vazia!")
-        }
-    }
-
-    override fun desempilhar(): Any? {
+    
+    override fun desempilhar(): Any?{
         var dadoTopo: Any? = null
-        if (!estaVazia()) {
+        if(!estaVazia()){
             dadoTopo = dados[ponteiroTopo]
-            ponteiroTopo--
-        } else {
-            println("Pilha está vazia!")
+            ponteiroTopo --
+        }
+        else {
+            println("Pilha está vazia !")
+        }
+
+        return dadoTopo
+    }
+
+    override fun atualizar(dado: Any?){
+        if(!estaVazia()){
+            dados[ponteiroTopo] = ponteiroTopo
+        }
+        else {
+            println("Pilha está vazia !")
+        }
+
+    }
+
+    override fun espiar(): Any?{
+        var dadoTopo: Any? = null
+        if(!estaVazia()){
+            dadoTopo = dados[ponteiroTopo]
+        }
+        else {
+            println("Pilha está vazia")
         }
         return dadoTopo
     }
 
-    override fun espiar(): Any? {
-        var dadoTopo: Any? = null
-        if (!estaVazia()) {
-            dadoTopo = dados[ponteiroTopo]
-        } else {
-            println("Pilha está vazia!")
-        }
-        return dadoTopo
-    }
-
-    override fun imprimir(): String {
-        var resultado = "["
-        for (i in ponteiroTopo downTo 0) {
-            resultado += if (i == 0) {
+    override fun imprimir(): String{
+        var retorno = "["
+        for (i in ponteiroTopo downTo 0){
+            retorno += if(i == 0){
                 "${dados[i]}"
             } else {
-                "${dados[i]}, "
+                "${dados[i]},"
             }
         }
-        return "$resultado]"
+        return "$retorno]"
     }
 }
