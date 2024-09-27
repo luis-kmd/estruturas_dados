@@ -1,12 +1,13 @@
-interface Enfileiravel {
-    // Métodos principais
+interface Enfileiravel{
+    // Metodos Principais
     fun enfileirar(dado: Any?) // C
     fun atualizar(dado: Any?)  // U
     fun frente(): Any?         // R
     fun desenfileirar(): Any?  // D
 
-    // Métodos auxiliares
+    // Metodos Auxiliares
     fun estaCheia(): Boolean
     fun estaVazia(): Boolean
     fun imprimir(): String
+
 }
