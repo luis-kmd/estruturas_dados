@@ -135,7 +135,7 @@ class ListaEstatica: Listavel{
     }
 
     override fun estaCheia(): Boolean{
-        return(quantidade == dado.size)
+        return(quantidade == dados.size)
     }
 
     override fun estaVazia(): Boolean{
