@@ -143,5 +143,4 @@ class Monte: AmontoavelMinimo{
             ajustarAbaixo(menorFilho)
         }
     }
-
 }
