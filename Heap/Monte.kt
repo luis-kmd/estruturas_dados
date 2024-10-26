@@ -106,6 +106,17 @@ class Monte: AmontoavelMinimo{
         return aux
     } 
 
+    private fun menor(a: Int, b: Int, c: Int){
+        if(dados[a] < dados[b]) &&  (dados[a] < dados[c])
+            return a
+        } else if (dados[b] < dados[a]) && (dados[b] < dados[c]){
+            return b
+        }
+        else{
+            return c
+        }
+    }
+
     private ajustarAcima(indice: Int){
         var indiceFilho = indice
         var indicePai = pai(indiceFilho)
@@ -122,7 +133,15 @@ class Monte: AmontoavelMinimo{
     }
     
     private ajustarAbaixo(indice: Int){
-
+        var indicePai = indice
+        var indiceFilhoEsquerda = filhoEsquerda(indicePai)
+        var indiceFilhoDireta = filhoDireita(indicePai)
+        val menor = menor(indice, indiceFilhoEsquerda, indiceFilhoDireita)
+        if(indicePai != menor){
+            val menorFilho = menor(indiceFilhoEsquerda, indiceFIlhoDireita)
+            troca(indicePai, menorFilho
+            ajustarAbaixo(menorFilho)
+        }
     }
 
 }
