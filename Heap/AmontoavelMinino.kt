@@ -1,10 +1,11 @@
-interface Amontoavel{
+interface AmontoavelMinimo{
 
 // METODOS PRINCIPAIS
     fun inserir(dado: Long)
     fun buscar(): Long?
-    atualizar(novoDado: Long)
-    extrair(): Long
+    fun atualizar(novoDado: Long)
+    fun extrair(): Long?
+    fun obter(): Long?
 
 // METODOS AUXILIARES
     fun estaCheia(): Boolean

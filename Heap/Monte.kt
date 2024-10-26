@@ -1,4 +1,4 @@
-class Monte: Amontoavel{
+class Monte: AmontoavelMinimo{
     private var dados: Array<Long>
     private var ponteiroFim: Int
 
@@ -71,6 +71,58 @@ class Monte: Amontoavel{
         return(indiceFilho - 1) / 2
     }
 
+    override fun inserir(dado: Long){
+        if(!estaCheia()){
+            ponteiroFim++
+            dados[ponteiroFim] = dado
+            ajustarAcima(ponteiroFim)
+        }
+        else{
+            print("Heap está cheia !")
+        }
+    }
+
+    override fun atualizar(novoDado: Long){
+        if(!estaVazia()){
+            dados[0] = novoDado
+            ajustarAbaixo(0)
+        }
+        else{
+            println("Heap está vazia !")
+        }
+    }
+
+    override fun extrair(): Long?{
+        var aux: Any? = null
+        if(!estaVazia()){
+            aux = dados[0]
+            dados[0] = dados[ponteiroFim]
+            ponteiroFim--
+            ajustarAbaixo(0)
+        }
+        else{
+            println("Heap está vazia !")
+        }
+        return aux
+    } 
+
+    private ajustarAcima(indice: Int){
+        var indiceFilho = indice
+        var indicePai = pai(indiceFilho)
+        while(indiceFilho > 0){
+            if(dados[indiceFilho] < dados[indicePai]){
+                troca(indiceFilho, IndicePai)
+            }
+            else{
+                break
+            }
+            indiceFilho = indicePai
+            indicePai = pai(indiceFilho)
+        }
+    }
     
+    private ajustarAbaixo(indice: Int){
+
+    }
 
 }
