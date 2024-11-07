@@ -1,4 +1,4 @@
-interface AmontoavelMaxima {
+interface AmontoavelMaximo {
 
     fun inserir(dado: Long)
     fun obter(): Long?
