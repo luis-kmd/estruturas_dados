@@ -1,5 +1,5 @@
 fun main() {
-    var pilha: Empilhavel = Pilha(8)
+    var pilha: Empilhavel = PilhaDinamica(8)
 
     pilha.empilhar("Instituto")
     pilha.empilhar("Federal")

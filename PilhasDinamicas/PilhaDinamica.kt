@@ -27,9 +27,9 @@ class PilhaDinamica(var tamanho: Int): Empilhavel{
     override fun desempilhar(): Any?{
         var dadoAux: Any? = null
         if(!estaVazia()){
-            dadoAux = ponteiroTopo.dado
+            dadoAux = ponteiroTopo?.dado
             if(ponteiroTopo != null)
-            ponteiroTopo.proximo = null
+            ponteiroTopo?.proximo = null
             quantidade--
         } else {
             println("Pilha está vazia !")
@@ -40,7 +40,7 @@ class PilhaDinamica(var tamanho: Int): Empilhavel{
     override fun espiar(): Any?{
         var dadoAux: Any? = null
         if(!estaVazia()){
-            dadoAux = ponteiroTopo.dado
+            dadoAux = ponteiroTopo?.dado
         } else {
             println("Pilha está vazia !")
         }
@@ -49,20 +49,20 @@ class PilhaDinamica(var tamanho: Int): Empilhavel{
 
     override fun atualizar(dado: Any?){
         if(!estaVazia()){
-            ponteiroTopo.dado = dado
+            ponteiroTopo?.dado = dado
         } else {
             println("Pilha está vazia !")
         }
     }
 
-    override fun imprimir(): String{
-        var aux: Any? = ponteiroTopo
+    override fun imprimir(): String {
+        var aux: NoDuplo? = ponteiroTopo
         var retorno = "["
-        while(aux.anterior != null){
-            retorno += aux.dado
+        while (aux != null) {
+            retorno += "${aux.dado}"
             aux = aux.anterior
+            if (aux != null) retorno += ", "
         }
-        return "${retorno}]"
+        return "$retorno]"
     }
-
 }
