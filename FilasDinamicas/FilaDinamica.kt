@@ -1,13 +1,13 @@
 class FilaDinamica(var tamanho: Int): Enfileiravel{
     private var ponteiroInicio: NoDuplo? = null
-    private var ponteiroFim: NoDuplo? null
+    private var ponteiroFim: NoDuplo? = null
     private var quantidade: Int = 0
 
     override fun estaVazia(): Boolean{
         return(quantidade == 0)
     }
 
-    override fun estaCheia: Boolean(){
+    override fun estaCheia(): Boolean{
         return(quantidade == tamanho)
     }
 
@@ -30,7 +30,7 @@ class FilaDinamica(var tamanho: Int): Enfileiravel{
         var aux: Any? = null
         if(!estaVazia()){
             aux = ponteiroInicio?.dado
-            ponteiroInicio? = ponteiroInicio.proximo
+            ponteiroInicio = ponteiroInicio?.proximo
             if(ponteiroInicio != null)
                 ponteiroInicio?.anterior = null
             else
@@ -64,8 +64,8 @@ class FilaDinamica(var tamanho: Int): Enfileiravel{
         var aux = ponteiroInicio
         var retorno = "["
         for(i in 0 until quantidade){
-            retorno += "${aux.dado},"
-            aux = aux.proximo
+            retorno += "${aux?.dado},"
+            aux = aux?.proximo
             
         }
         return "${retorno}]"
