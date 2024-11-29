@@ -22,7 +22,7 @@ class FilaDinamica(var tamanho: Int): Enfileiravel{
             ponteiroFim = novoNo
             quantidade++
         } else {
-            throw.NoSuchElementException("Fila está cheia !")
+            println("Fila está cheia !")
         }
     }
 
@@ -37,17 +37,17 @@ class FilaDinamica(var tamanho: Int): Enfileiravel{
                 ponteiroFim = null    
             quantidade --
         } else {
-            throw.NoSuchElementException("Fila está vazia !")
+            println("Fila está vazia !")
         }
         return aux
     }
 
     override fun frente(): Any?{
-        var aux: Any? = Null
+        var aux: Any? = null
         if(!estaVazia()){
             aux = ponteiroInicio?.dado
         } else {
-            throw.NoSuchElementException("Fila está vazia !")
+            println("Fila está vazia !")
         }
         return aux
     }
@@ -56,7 +56,7 @@ class FilaDinamica(var tamanho: Int): Enfileiravel{
         if(!estaVazia()){
             ponteiroInicio?.dado = dado
         } else{
-            throw.NoSuchElementException("Fila está vazia !")
+            println("Fila está vazia !")
         }
     }
 
