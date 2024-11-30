@@ -12,3 +12,6 @@ interface AmontoavelMaximoDinamico {
     fun imprimir(): String
 
 }
+
+
+// LISTA DINAMICA, PILHA DINAMICA, DUPLAMENTE E SIMPLESMENTE CADEADA, HEAP
