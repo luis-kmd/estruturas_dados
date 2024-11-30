@@ -25,6 +25,24 @@ class ListaDinamica(var tamanho: Int): Listavel {
         }
     }
 
+    override fun limpar(){
+        quantidade = 0
+        ponteiroFim = ponteiroInicio = null
+    }
+
+    override fun selecionarTodos(): Array<Any?>{
+        val arrayDados: Array<Any?> = ArrayOfNulls(quantidade)
+        val aux = ponteiroInicio
+        if(!estaVazia()){
+            for(i in 0 until quantidade){
+                arrayDados[i] = aux.dado
+                aux = aux.proximo    
+        }
+        else {
+            throw NoSuchElementException("Lista Vazia !")
+        }
+    }
+
     override fun imprimir(): String{
         var resultado = "["
         var aux = ponteiroInicio
