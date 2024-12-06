@@ -107,12 +107,13 @@ class MonteMaximoDinamico(private var tamanho: Int) : AmontoavelMaximoDinamico {
     }
 
     override fun imprimir(): String {
-        val retorno = "["
+        var retorno = "["
         for (i in 0..ponteiroFim) {
             retorno += "${dados[i]}"
-            if (i != ponteiroFim) 
-            retorno += "${dados[i],}
+            if (i != ponteiroFim)
+                retorno += ","
         }
         return "${retorno}]"
-    }
+}
+
 }
