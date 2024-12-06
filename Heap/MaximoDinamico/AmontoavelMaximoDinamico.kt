@@ -6,12 +6,10 @@ interface AmontoavelMaximoDinamico {
     fun atualizar(novoDado: Long)
     fun extrair(): Long?
 
-    // METODOS AUXILIARIAS
+    // METODOS AUXILIARES
     fun estaCheia(): Boolean
     fun estaVazia(): Boolean
     fun imprimir(): String
-
 }
-
 
 // LISTA DINAMICA, PILHA DINAMICA, DUPLAMENTE E SIMPLESMENTE CADEADA, HEAP

@@ -1,20 +1,20 @@
-Class MonteMaximoDinamico(private var tamanho: Int): AmontoavelMaximoDinamico{
+class MonteMaximoDinamico(private var tamanho: Int) : AmontoavelMaximoDinamico {
     private var dados = LongArray(tamanho)
     private var ponteiroFim: Int = -1
 
-    private fun indicePai(filho: Int): Int{
-        return (filho-1) / 2
+    private fun indicePai(filho: Int): Int {
+        return (filho - 1) / 2
     }
 
-    private fun filhoEsquerda(pai: Int): Int{
-        return pai*2+1
+    private fun filhoEsquerda(pai: Int): Int {
+        return pai * 2 + 1
     }
 
-    private fun filhoDireita(pai: Int): Int{
-        return pai*2+2
+    private fun filhoDireita(pai: Int): Int {
+        return pai * 2 + 2
     }
 
-    private fun maior(pai: Int, esquerda: Int, direita: Int): Int{
+    private fun maior(pai: Int, esquerda: Int, direita: Int): Int {
         var maior = pai
 
         if (esquerda <= ponteiroFim && dados[esquerda] > dados[maior])
@@ -26,13 +26,13 @@ Class MonteMaximoDinamico(private var tamanho: Int): AmontoavelMaximoDinamico{
         return maior
     }
 
-    private fun trocar(a: Int, b: Int){
+    private fun trocar(a: Int, b: Int) {
         val aux = dados[a]
         dados[a] = dados[b]
         dados[b] = aux
     }
 
-    private fun ajustarAbaixo(indiceRaiz: Int){
+    private fun ajustarAbaixo(indiceRaiz: Int) {
         var pai = indiceRaiz
         while (true) {
             val filhoEsquerda = filhoEsquerda(pai)
@@ -44,21 +44,21 @@ Class MonteMaximoDinamico(private var tamanho: Int): AmontoavelMaximoDinamico{
         }
     }
 
-    private fun ajustarAcima(indice: Int){
+    private fun ajustarAcima(indice: Int) {
         var filho = indice
         var pai = indicePai(filho)
 
-        while (filho > 0 && dados[pai] < dados[filho]){
+        while (filho > 0 && dados[pai] < dados[filho]) {
             trocar(pai, filho)
             filho = pai
             pai = indicePai(filho)
         }
     }
 
-    private fun redimencionar(){
+    private fun redimensionar() {
         tamanho *= 2
-        var novosDados = LongArray(tamanho)
-        for (i in 0 .. ponteiroFim){
+        val novosDados = LongArray(tamanho)
+        for (i in 0..ponteiroFim) {
             novosDados[i] = dados[i]
         }
         dados = novosDados
@@ -66,26 +66,18 @@ Class MonteMaximoDinamico(private var tamanho: Int): AmontoavelMaximoDinamico{
 
     override fun inserir(dado: Long) {
         if (estaCheia())
-            redimencionar()
+            redimensionar()
         ponteiroFim++
         dados[ponteiroFim] = dado
         ajustarAcima(ponteiroFim)
     }
 
     override fun obter(): Long? {
-        var retorno: Long? = null
-
-        if (!estaVazia()){
-            retorno = dados[0]
-        } else {
-            println("Heap Vazia!")
-        }
-
-        return retorno
+        return if (!estaVazia()) dados[0] else null
     }
 
     override fun atualizar(novoDado: Long) {
-        if (!estaVazia()){
+        if (!estaVazia()) {
             dados[0] = novoDado
             ajustarAbaixo(0)
         } else {
@@ -94,22 +86,20 @@ Class MonteMaximoDinamico(private var tamanho: Int): AmontoavelMaximoDinamico{
     }
 
     override fun extrair(): Long? {
-        var retorno: Long? = null
-
-        if (!estaVazia()){
-            retorno = dados[0]
+        return if (!estaVazia()) {
+            val retorno = dados[0]
             dados[0] = dados[ponteiroFim]
             ponteiroFim--
             ajustarAbaixo(0)
+            retorno
         } else {
             println("Heap Vazia!")
+            null
         }
-
-        return retorno
     }
 
     override fun estaCheia(): Boolean {
-        return (ponteiroFim == (dados.size-1))
+        return (ponteiroFim == (dados.size - 1))
     }
 
     override fun estaVazia(): Boolean {
@@ -117,14 +107,12 @@ Class MonteMaximoDinamico(private var tamanho: Int): AmontoavelMaximoDinamico{
     }
 
     override fun imprimir(): String {
-        var retorno = "["
-
-        for (i in 0 .. ponteiroFim){
+        val retorno = "["
+        for (i in 0..ponteiroFim) {
             retorno += "${dados[i]}"
-            if (i != ponteiroFim)
-                retorno += ","
+            if (i != ponteiroFim) 
+            retorno += "${dados[i],}
         }
-
-        return "$retorno]"
+        return "${retorno}]"
     }
 }
