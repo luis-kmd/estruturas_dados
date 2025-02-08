@@ -1,0 +1,17 @@
+Arvores binárias
+    Inserção
+    Remoção
+    Busca
+
+Árvores Balanceadas
+    AVL
+        Rotação simples
+            a Esquerda ++
+            a Direita
+        Rotação Dupla
+            a Esquerda
+            a Direita
+        fb = fator de balanceamento
+    
+
+    
