@@ -1,8 +1,7 @@
-class ABB<T : Comparable<T>> {
+class ABB<T : Comparable<T>> : ArvoreBinaria<T> {
     private var raiz: Node<T>? = null
 
-    // Método de inserção
-    fun insere(valor: T): Boolean {
+    override fun insere(valor: T): Boolean {
         if (raiz == null) {
             raiz = Node(valor)
             return true
@@ -25,14 +24,13 @@ class ABB<T : Comparable<T>> {
                     }
                     atual = atual.dir
                 }
-                else -> return false // Valor já existe na árvore
+                else -> return false // Valor já existe
             }
         }
         return false
     }
 
-    // Método de busca
-    fun busca(valor: T): T? {
+    override fun busca(valor: T): T? {
         var atual = raiz
         while (atual != null) {
             atual = when {
@@ -41,56 +39,36 @@ class ABB<T : Comparable<T>> {
                 else -> return atual.info
             }
         }
-        return null // Valor não encontrado
+        return null
     }
 
-    // Método de remoção
-    fun remove(valor: T): T? {
-        var atual = raiz
-        var pai: Node<T>? = null
-
-        // Localiza o nó a ser removido e seu pai
-        while (atual != null && atual.info != valor) {
-            pai = atual
-            atual = if (valor < atual.info) atual.esq else atual.dir
-        }
-
-        atual ?: return null // Valor não encontrado
-
-        val retorno = atual.info
-
-        // Nó é uma folha
-        if (atual.esq == null && atual.dir == null) {
-            if (atual == raiz) raiz = null
-            else if (pai?.esq == atual) pai.esq = null
-            else pai?.dir = null
-        }
-        // Nó tem apenas um filho
-        else if (atual.esq == null || atual.dir == null) {
-            val filho = atual.esq ?: atual.dir
-            if (atual == raiz) raiz = filho
-            else if (pai?.esq == atual) pai.esq = filho
-            else pai?.dir = filho
-        }
-        // Nó tem dois filhos
-        else {
-            val substituto = removeMaiorEsq(atual)
-            atual.info = substituto
-        }
-
-        return retorno
+    override fun remove(valor: T): Boolean {
+        raiz = removeRec(raiz, valor) ?: return false
+        return true
     }
 
-    private fun removeMaiorEsq(no: Node<T>): T {
-        var pai = no
-        var atual = no.esq!!
+    private fun removeRec(no: Node<T>?, valor: T): Node<T>? {
+        if (no == null) return null
 
-        while (atual.dir != null) {
-            pai = atual
-            atual = atual.dir!!
+        when {
+            valor < no.info -> no.esq = removeRec(no.esq, valor)
+            valor > no.info -> no.dir = removeRec(no.dir, valor)
+            else -> {
+                // Nó encontrado, trata remoção
+                if (no.esq == null) return no.dir
+                if (no.dir == null) return no.esq
+
+                // Substitui pelo maior da subárvore esquerda
+                no.info = maiorValor(no.esq!!)
+                no.esq = removeRec(no.esq, no.info)
+            }
         }
+        return no
+    }
 
-        if (pai.esq == atual) pai.esq = atual.esq else pai.dir = atual.esq
+    private fun maiorValor(no: Node<T>): T {
+        var atual = no
+        while (atual.dir != null) atual = atual.dir!!
         return atual.info
     }
 }
